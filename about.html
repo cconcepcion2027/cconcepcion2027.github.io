@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@400;900&family=Merriweather:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Noctierre Academy</title>
+    <style>
+        body{
+            background-image: url(home.jpg);
+            background-position: top;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        header{
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.486);
+            height:fit-content
+        }
+        nav{
+          background-color: rgba(0, 0, 0, 0.00001);
+          font-family: 'Merriweather', serif;
+        }
+        h1{
+          font-family: 'Inknut Antiqua', serif;
+          font-size: 45px;
+          color: #f5f5f5;
+          text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+        }
+        li{
+          list-style-type: none;
+        }
+        a{  
+          text-decoration: none;
+          color: #f5f5f5;
+        }
+        .title:hover {
+            text-shadow: 0 0 20px #fff, 0 0 30px #FFDCA7, 0 0 40px #FFDCA7, 0 0 50px #FFDCA7, 0 0 60px #FFDCA7;
+        }
+        h2{
+            font-family: 'Inknut Antiqua', serif;
+            font-size: 45px;
+            color: #f5f5f5;
+        }
+        h3{
+            font-family: 'Inknut Antiqua', serif;
+            font-size: 30px;
+            color: #f5f5f5;
+        }
+        p{
+            font-family: 'Merriweather', serif;
+            color: #f5f5f5;
+        }
+        .container{
+            width: 100%;
+        }
+        .container-lg{
+            max-width: 600px;
+            min-width: 200px;
+            background-color: rgba(64, 74, 80, 0.514);
+            text-align: center;
+        }
+        .container-lg img{
+            transition: 1s ease;
+        }
+        .container-lg img:hover{
+            transform: scale(1.1);
+            transition: 2s ease;
+        }
+        #staff img{
+          width: 100%;
+        }
+        #staff .col-lg p{
+          margin: 1px;
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        footer{
+            background-color: rgba(0, 0, 0, 0.486);
+            text-align: center;
+            padding: 10px;
+        }
+        footer .card {
+        display: none;
+        position: fixed;
+        background-color: #f5f5f5;
+        border-radius: 10px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 7%;
+        padding: 20px;
+        z-index: 10;
+        overflow: scroll;        
+      }
+      footer .card p, .card h3{
+        color: black;
+      }
+      footer .card h3{
+        text-align: center;
+      }
+        #bout:after, #serv:after, #enrol:after, #ppolicy:after, #dpolicy:after {
+        position: fixed;
+        content: "";
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0);
+        z-index: -2;
+        }
+        #bout:before, #serv:before #enrol:before, #ppolicy:before, #dpolicy:before {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: #FFF;
+        z-index: -1;
+        }
+        footer button{
+          background-color: transparent;
+          border: none;
+          color: #f5f5f5;
+        }
+        footer button:hover{
+          font-weight: bold;
+        }
+        ul{
+          list-style-type: none;
+        }
+        ul a{
+          text-decoration: none;
+          color: #f5f5f5;
+        }
+        ul a:hover{
+          font-weight: bold;
+        }
+        .icons {
+          display: flex;
+          margin-top: 30px;
+          gap: 30px;
+          cursor: pointer;
+          transition: .3s ease;
+          font-size: x-large;
+        }
+        .icons i {
+          color: #afb6c7;
+          transition:.3s ease;
+          }
+        .icons i:hover  {     
+          color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header class="align-items-center pt-3">
+        <img style="justify-content: center; text-align: center; align-items: center; width: 100px;" src="logo.png" alt="">
+        <h1 class="col-sm"><a class="title active" aria-current="true" href="about.html">Noctierre Academy</a></h1>
+      
+      <div class= "navbar-expand-md navbar-dark bd-navbar m-0" style="text-align: left;">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="true" aria-label="Toggle navigation">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" class="bi" fill="currentColor" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path>
+              </svg>
+          </button>
+  
+          <nav class="row m-0 p-1 flex-wrap flex-md-nowrap"  style="justify-content: center; text-align: center; align-items: center;">
+              <div class="navbar-collapse collapse show" id="bdNavbar">
+                  <ul class="navbar-nav flex-row flex-wrap bd-navbar-nav pt-2 py-lg-0" style="width: 100%;">
+                      <li class="nav-item col col-md">
+                          <a class="nav-link p-2" href="index.html"> Home</a>
+                      </li>
+                      <li class="nav-item col col-md">
+                          <a class="nav-link p-2" href="courses.html" >Courses</a>
+                      </li>
+                      <li class="nav-item col col-md">
+                          <a class="nav-link p-2" href="extra.html" >Extra-Curricular</a>
+                      </li>
+                      <li class="nav-item col col-md">
+                          <a class="nav-link p-2" href="contacts.html" >Contacts</a>
+                      </li>
+                  </ul>
+                  <hr class="d-md-none text-white-50">
+              </div>
+          </nav>
+ 
+      </div> 
+    </header>
+        <br>
+    <div id="page1">
+        <div class="container-lg py-5">
+            <img src="ind.jpg" class="card-img-top" style="width: 300px; border-radius: 15px;" alt="...">
+            <br><br>
+            <h2>Welcome</h2>
+            <h3>Scientia. Potentia. Diligentia.</h3>
+            <p>Greetings! You have arrived at the home of excellence, power and diligence. Your thirst for knowledge can be quenched with the help of our top-notch curriculum and facilities. Not only that, but we have also chosen the finest instructors and teachers to make sure your child receives the best education. Our school is a safe environment for learners and teachers alike, with a strict policy on issues like bullying.</p>
+            <br><br>
+        </div>
+
+        <br>
+
+        <div class="row m-0" style="background-color: rgb(109, 159, 202); justify-content: center;">
+            <div class="col-lg-8 card m-3 p-3" style="width: 750px; background-color: rgba(0, 0, 0, 0.377);">
+                <h2>Early in the 20th Century</h2>
+                <p>The Noctierre Academy's founders recognized the potential in children who aspired to pursue careers in science, literature, or the arts. In order to provide scholars with a classical education that included a solid foundation in the arts, literature, and sciences, they made the decision to open a small school.</p>
+
+                <p>Noctierre Acdemy began to take shape with the help of a group of committed faculty members and kind donors. After graduating from the academy, the first students went on to become ambitious leaders in a variety of fields, including business, politics, the sciences, and the arts.</p>
+              
+                <p>The academy grew over the years, introducing new courses and facilities. Noctierre Academy still prepares students for leadership roles in the future today through to its accomplished and diverse student body, esteemed faculty, and vibrant, rich campus community. </p>
+            </div>
+            <div class="col m-3 p-3" style="justify-content: center;">
+                <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                      <div class="carousel-inner">
+                        <div class="carousel-item active">
+                          <img src="veritas.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                          <img src="15yrs.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                          <img src="alchemy.jpg" class="d-block w-100" alt="...">
+                        </div>
+                      </div>
+                </div>
+              </div>
+          </div>
+        </div>
+
+      <div id="staff" style="background-color: rgb(103, 105, 136)">
+        
+        <div class="row m-0 p-3" style="justify-content: center;">
+          <h2 style="text-align: center;">Staff Directory</h2>
+        <div class="col-lg-4 card p-1 m-3" style="text-align: center; background-color: rgba(64, 74, 80, 0.514); align-items: center;">
+          <br>
+          <img src="head.png" class="card-img-top" style="width: 300px; border-radius: 100%;" alt="...">
+          <br><br>
+          <h2>Headmistress Noctierre</h2>
+          <p>Our headmistress is a forward-thinking leader who is devoted to each student's academic success, extracurricular activities, and overall well-being. She shows a personal interest in every student's development, motivating and assisting them in realizing their greatest potential. Our headmistress strives to foster an atmosphere where each student feels appreciated and welcomed. She is a strong supporter of diversity and inclusivity. She is a motivating leader that puts forth endless effort to support the accomplishments of her staff, pupils, and school. She sets high standards for academic performance and inspires others to follow suit, making her a role model for other instructors. Her enthusiasm for learning and development is infectious, and her commitment to her pupils and staff is apparent in everything she does.</p>
+          <br><br>
+        </div>
+        
+        <div class="col">
+        <br>
+          
+
+          <div class="row m-1">
+            <div class="col-lg-4">
+              <img src="teach1.png" alt="">
+            </div>
+            <div class="col-lg">
+              <h3>Professor Margaret</h3>
+              <h4>Languages Teacher</h4>
+              <h4>Librarian</h4>
+              <p>email : margaretenglish@noctierre.edu</p>
+              <p>phone number : 0912 345 6782</p>
+            </div>
+          </div>
+
+          <div class="row m-1">
+            <div class="col-lg-4">
+              <img src="teach2.jpg" alt="">
+            </div>
+            <div class="col-lg">
+              <h3>Professor Steven</h3>
+              <h4>Special Science Teacher</h4>
+              <h4>Mathematician</h4>
+              <p>email : stevenmathematics@noctierre.edu</p>
+              <p>phone number : 0954 634 4749</p>
+            </div>
+          </div>
+
+          <div class="row m-1">
+            <div class="col-lg-4">
+              <img src="teach3.jpg" alt="">
+            </div>
+            <div class="col-lg">
+              <h3>Professor Matthew</h3>
+              <h4>Values Educator</h4>
+              <h4>Guidance Counselor</h4>
+              <p>email : matthewvalues@noctierre.edu</p>
+              <p>phone number : 0913 579 2468</p>
+            </div>
+          </div>
+
+          <div class="row m-1">
+            <div class="col-lg-4">
+              <img src="teach4.jpg" alt="">
+            </div>
+            <div class="col-lg">
+              <h3>Professor Catherine</h3>
+              <h4>General Science Teacher</h4>
+              <h4>Information and Communications Technology</h4>
+              <p>email : catherinetechnology@noctierre.edu</p>
+              <p>phone number : 0934 567 8921</p>
+            </div>
+          </div>
+
+      </div>
+    </div>
+  </div>
+
+    <footer>
+        <div class="container-fluid my-1 mx-0 d-flex" style="justify-content: center; text-align: left;">
+            <div class="col-lg-1">
+                <img src="logo.png" alt="" style="width: 100px;">
+            </div>
+            <div class="col-lg-2 p-3" style="align-items: center;">
+                <h1 style="font-size: 30px;">Noctierre Academy</h1>
+            </div>
+        </div>
+      
+            <div class="row m-0" style="text-align: left; color: #f5f5f5;">
+              <div class="col-lg">
+                  <h4>The School</h4>
+                  <ul class="links">
+                    <li>
+                      <button class="button" onclick="show('bout')">About Us</button>
+                      <div class="card" id="bout">
+                        <h3>About Us</h3>
+                        <p>Our school program is designed to support a child's health, academic, and social-emotional development from a very early age during their foundation years up to their specialization years. Our main mission is for our scholars to learn leadership, common core values and relationships in life. Our main goal is to create a welcoming, orderly, and safe learning atmosphere where each and every member of our community feels appreciated and supported. </p>
+                        <p>In Noctierre Academy, we believe that every child has their own unique traits and abilities, and our goal is to nurture and cultivate each individual to their full potential. Since kindness, compassion, and empathy are the cornerstones of a positive learning environment, we strongly emphasize these qualities. Our goal is to establish a welcoming, safe, and supportive learning environment where each and every student is treated with respect and worth. Our teachers are highly qualified experts with a thorough understanding of learning styles and child development. Regardless of a child's socialization, they are adept at adapting their teaching strategies to meet their needs. In addition, we encourage a culture of learning via play and creativity, giving our kids a secure and encouraging environment in which to discover and pursue their hobbies.</p>
+                        <p>We want to make sure that our scholars are committed to creativity, intellectual achievement, and personal development. We encourage our students to get involved in a range of extracurricular activities, including sports, organizations, and committees, in addition to our academic offerings, which encompass science, mathematics, engineering, and technology. It is highly encouraged for our kids to assume leadership roles and explore diverse interests, including but not limited to athletics, music, painting, and other creative pursuits. We also encourage a culture of academic excellence and competition by allowing students to compete on an intra- or inter-school level and showcasing their abilities.</p>
+                        <a onclick="hide('bout')">Close</a>
+                      </div>
+                    </li>
+      
+                    <li>
+                      <button class="button" onclick="show('serv')">Our Services</button>
+                      <div class="card" id="serv">
+                        <h3>Our Services</h3>
+                        <p>At Noctierre Academy, we offer a full range of services designed to support students in achieving both academic and personal success. In order to give students the resources and information they need to realize their full potential, we put a lot of emphasis on helping them develop their academic abilities, sense of self, and career paths.</p>
+                        <p>Our curriculum are made to be both intellectually stimulating and demanding, giving students the tools they need to succeed. We work directly with students to help them create a growth mindset, set objectives, and identify strategies for reaching those goals. Our programs are customized to meet the needs of each individual student.</p>
+                        <p>We offer a wide range of extracurricular activities and services to support students in enhancing their social and emotional competencies in addition to academic programs. These include initiatives that assist students in gaining confidence and developing critical social skills, such as mentorship programs, public speaking classes, and leadership training.</p>
+                        <p></p>
+                        <p>In order to enhance and guarantee the stability of our scholars' mental health, we also provide advice and counseling services. Guidance counseling services can assist students in recognizing early warning indicators of mental health problems and receiving the proper treatment. This can assist students in efficiently managing stress, anxiety, depression, and other mental health concerns before they worsen and impair their academic performance.</p>
+                        <a onclick="hide('serv')">Close</a>
+                      </div>
+                    </li>
+      
+                    <li>
+                      <button class="button" onclick="show('enrol')">Enrolment</button>
+                      <div class="card" id="enrol">
+                        <h3>Enrolment</h3>
+                        <p>We are happy to declare that our New Academy will open for the following academic year! Students have a fantastic opportunity to further their education, pick up new skills, and prepare for the future with this. A vast array of classes and workshops, including those in computer science, the arts, literature, science, technology, and much more, will be available.</p>
+                        <p>With our Academy, you can begin your road towards a better future by enrolling today.</p>
+                        <a onclick="hide('enrol')">Close</a>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-lg">
+                    <h4>Contact</h4>
+                    <ul class="links">
+                        <li>5GRM+WWJ</li>
+                        <li>Lilly Hill Clark Freeport Zone Pampanga</li>
+                        <li>Email : noctierreacademy@gmail.com</li>
+                        <li>Telephone Number : 0987 654 3219</li>
+                    </ul>
+                </div>
+                <div class="col-lg">
+                    <h4>Policy</h4>
+                    <ul class="links">
+                        <li>
+                            <button class="button" onclick="show('ppolicy')">Privacy Policy</button>
+                            <div class="card" id="ppolicy">
+                              <h3>Privacy Policy</h3>
+                              <p>Noctierre Academy is dedicated to safeguarding the confidentiality of our staff, teachers, and students. This Privacy Policy describes how we gather, handle, store, and share personal data, including the student records we maintain. We save personal data for as long as it takes to serve our community's needs for services and education. When the information is no longer needed for the intended use, we will either destroy the personal data or make sure it has been de-identified and rendered anonymous before sharing it or using it again. Noctierre Academy takes appropriate precautions to guard against loss, theft, destruction, unauthorized access, disclosure, and alteration of the personal information under our control. </p>
+                              <p>To guarantee the security and privacy of personal data, we have put in place procedural, electronic, and physical protections. People have the right to see the personal information we have about them and to ask that it be corrected. Reasonable requests to see, update, or correct personal data shall be complied with.</p>
+                              <p>This Privacy Policy may be updated from time to time. Any significant modifications to this policy will be announced on our website and at the locations of our schools. Please get in touch with us if you have any queries or worries about this privacy statement, the school's data retention and privacy policies, or access to personal data.</p>
+                              <a onclick="hide('ppolicy')">Close</a>
+                            </div>
+                        </li>
+                        <li>
+                            <button class="button" onclick="show('dpolicy')">Data Policy</button>
+                            <div class="card" id="dpolicy">
+                              <h3>Data Policy</h3>
+                              <p>Noctierre Academy School is dedicated to safeguarding the confidentiality of our staff, teachers, and students. Our school's procedures for using, processing, and safeguarding personal data are described in this data policy. All private, sensitive, and confidential information that we gather, process, and keep is covered by this policy. When it's required to give our community education and other services, we get personal information from students, staff members, and outside parties. Names, addresses, phone numbers, email addresses, dates of birth, grades, and academic transcripts are among the personal data that we gather. In order to deliver services and instruction to the school community, we are required by law to gather, utilize, and keep personal information. </p>
+                              <p>Administrative and operational uses, including enrollment, registration, invoicing, and communication, may be made of this data. Personal data may occasionally be utilized for research, including academic or quality-improving studies. Please get in touch with us if you have any queries or worries about our data protection procedures, the school's data retention and data policies, or access to personal data.</p>
+                              <a onclick="hide('dpolicy')">Close</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg">
+                    <h4>Newsletter</h4>
+                    <p style="color: #f5f5f5;">
+                    Subscribe to our newsletter for a weekly dose
+                    of news, updates, helpful tips, and
+                    exclusive offers.
+                    </p>
+                    <div class="icons">
+                        <i class="fa-brands fa-facebook-f"></i>
+                        <i class="fa-brands fa-twitter"></i>
+                        <i class="fa-brands fa-linkedin"></i>
+                        <i class="fa-brands fa-github"></i>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <p style="color: #f5f5f5;">Copyright © 2023. Noctierre Academy. All Rights Are Reserved.</p>
+        </footer>
+      
+        <script>
+          $ = function(id) {
+            return document.getElementById(id);
+          }
+      
+          var show = function(id) {
+            $(id).style.display ='block';
+          }
+          var hide = function(id) {
+            $(id).style.display ='none';
+          }
+        </script>
+</body>
+</html>
