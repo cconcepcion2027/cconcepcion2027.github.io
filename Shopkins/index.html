@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopkins - Shop Now !</title>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+   
+    <link href="https://fonts.cdnfonts.com/css/royal-acidbath" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+
+
+    <style>
+        body{
+            background-image: url('https://wallpapers.com/images/featured/shop-background-ms6oc93y0nouxst3.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+
+        #h1{
+            font-family: 'Royal Acidbath', sans-serif;  
+            text-align: center;  
+            color: #3b222a;  
+            font-size: 40px;    
+            text-shadow: none;
+        }
+        h1{
+            font-family: 'Royal Acidbath', sans-serif;  
+            text-align: center;  
+            color: #ffffff;  
+            font-size: 40px;  
+            text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;                                        
+        }
+
+
+        p, label, input, ul{
+            font-family: 'Quicksand';
+            color: #3b222a;  
+            font-weight: 500;
+            font-size: 20px;
+        }
+
+
+        h2{
+            font-family: 'Quicksand';
+            color: #3b222a;  
+            font-weight: 600;
+            font-size: 30px;
+        }
+
+
+        h4{
+            font-family: 'Royal Acidbath';
+            color: #3b222a;  
+            font-size: 35px;
+        }
+
+
+        #categ1 .card, #categ2 .card, #categ3 .card, #categ4 .card{
+            border-radius: 20px;
+            border-style: none;
+            background-color: #efe2ba;
+            transition: .5s ease;
+            text-align: center;
+            box-shadow: 0px 10px 30px -5px rgba(0,0,0,0.57);
+
+
+        }
+        #categ1 .card:hover, #categ2 .card:hover, #categ3 .card:hover, #categ4 .card:hover{
+            background-color: #c5cbe3;
+            transition: .5s ease;
+            transform: scale(1.02);
+        }
+
+
+        #form.card, #co.card{
+            box-shadow: 0px 10px 30px -10px rgba(0,0,0,0.57);
+            border-radius: 20px;
+            border-style: none;
+        }
+
+
+        button{
+            border-radius: 15px;
+            border-style: none;
+            color: #3b222a;
+            font-family: 'Quicksand';
+            font-weight: 500;
+            font-size: 20px;
+        }
+        button:hover{
+            background-color: #4056a1;
+        }
+
+
+        .button{
+            border-radius: 35px;
+            border-style: none;
+            font-family: 'Quicksand';
+            font-weight: 500;
+            font-size: 20px;
+            transition: .5s ease;
+        }
+
+
+        .btn:disabled{
+            opacity: 100%;
+            border-style: none;
+            color: #3b222a;
+            font-family: 'Quicksand';
+            font-weight: 500;
+            font-size: 20px;
+        }
+       
+        img{
+            padding: 10px;
+        }
+
+
+
+    </style>
+
+
+<script>
+    let arrayCartDetails = [];
+    function addItem(prod_name, prod_price) {
+        var cust_order = {
+            prod_name: prod_name,
+            prod_price: parseFloat(prod_price)
+        };
+        arrayCartDetails.push(cust_order);
+        addToList(cust_order);
+        updateCost();
+    }
+
+
+    function subtractItem(prod_name) {
+        for (var i = 0; i < arrayCartDetails.length; i++) {
+            if (arrayCartDetails[i].prod_name === prod_name) {
+                arrayCartDetails.splice(i, 1);
+                updateList();
+                updateCost();
+                break;
+            }
+        }
+    }
+
+
+    function updateList() {
+        var list = document.getElementById("arrayCartDetails");
+        list.innerHTML = "";
+        arrayCartDetails.forEach(item => {
+            addToList(item);
+        });
+    }
+
+
+    function addToList(cust_order) {
+        var li = document.createElement("li");
+        li.classList.add("list-group-item");
+   
+        var itemInfo = document.createElement("span");
+        itemInfo.textContent = cust_order.prod_name + " - ₱" + cust_order.prod_price.toFixed(2);
+        li.appendChild(itemInfo);
+   
+        document.getElementById("arrayCartDetails").appendChild(li);
+    }
+
+
+    function updateCost() {
+        var totalCost = 0;
+        arrayCartDetails.forEach(item => {
+            totalCost += item.prod_price;
+        });
+        document.getElementById("totalCost").textContent = "Total: ₱" + totalCost.toFixed(2);
+    }
+
+
+
+
+
+
+        function checkout() {
+            var inputItems = document.getElementById('cust_order');
+            var theItems = saving();
+            inputItems.value = JSON.stringify(theItems);
+            document.querySelector("form").submit();
+        }
+
+
+       
+    function saving() {
+            var savedItems = [];
+            for (var i = 0; i < arrayCartDetails.length; i++) {
+                savedItems.push({ prod_name: arrayCartDetails[i].prod_name, prod_price: parseFloat(arrayCartDetails[i].prod_price.toFixed(2)) });
+            }
+            return savedItems;
+        }
+
+
+
+
+</script>
+
+
+</head>
+
+
+
+
+
+
+<body>
+   
+    <div class="row m-0 p-3" style="background-color: #f5f5f5;">
+        <header class="d-flex flex-wrap justify-content-center py-2">
+          <a href="#" class="d-flex me-md-auto link-body-emphasis text-decoration-none">
+            <h1 id="h1"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="45" fill="currentColor" class="bi bi-basket-fill" viewBox="0 0 16 16">
+                <path d="M5.071 1.243a.5.5 0 0 1 .858.514L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 6h1.717zM3.5 10.5a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0z"/>
+              </svg>Shopkins</h1>
+          </a>
+   
+          <ul class="nav nav-pills">
+            <li><a href="#" class="nav-link active" aria-current="page" style="background-color: #54795d;">Home</a></li>
+            <li><a href="about.html" class="nav-link" style="color: #54795d;">About Us</a></li>
+          </ul>
+        </header>
+    </div>
+
+
+
+
+
+
+        <div class="row m-5 p-1" id="categ1">
+   
+            <h1>- Gadgets -</h1>
+            <br><br><br>
+   
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="jbl.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>JBL Headphones</h2>
+                        <h5>19600.00 Php</h5>
+                        <button type="button" onclick="addItem('JBL Headphones','19600.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('JBL Headphones')">Remove</button>
+                        <p>This headphones offers pro-quality sound w/ comfy cushioned earcups. With advanced technology, it offers wireless bluetooth and noise cancellation.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="echo.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>Echo 2nd Generation</h2>
+                        <h5>149000.00 Php</h5>
+                        <button type="button" onclick="addItem('Echo 2nd Generation','149000.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('Echo 2nd Generation')">Remove</button>
+                        <p>Meet Echo, the newest smart speaker that will help you in your everyday life.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="nokia220.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>Nokia 220</h2>
+                        <h5>1200.00 Php</h5>
+                        <button type="button" onclick="addItem('Nokia 220','1200.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('Nokia 220')">Remove</button>
+                        <p>Enjoy a classic smartphone with long lasting battery and classic games like snake. Now in 4G.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="iphonepromaxxwynn.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>Iphone Pro Maxwynn</h2>
+                        <h5>69690.00 Php</h5>
+                        <button type="button" onclick="addItem('Iphone Pro Maxwynn','69690.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('Iphone Pro Maxwynn')">Remove</button>
+                        <p>Your new iPhone awaits. Make it yours. With a 6.7 inch display and offers fast charging battery.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="ipadpro.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>Ipad Pro</h2>
+                        <h5>80000.00 Php</h5>
+                        <button type="button" onclick="addItem('Ipad Pro','80000.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('Ipad Pro')">Remove</button>
+                        <p>New features for next-level creativity. The thinnest Apple product ever with ultra retina XDR and M4 chip.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="samsuntv.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>Samsung TV</h2>
+                        <h5>240000.00 Php</h5>
+                        <button type="button" onclick="addItem('Samsung TV','240000.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('Samsung TV')">Remove</button>
+                        <p>Upgrade your home entertainment with this Samsung TV. Exceptional detail with 4K UHD resolution and slim design.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+   
+        <div class="row m-5 p-1" id="categ2">
+   
+            <h1>- Legos -</h1>
+            <br><br><br>
+   
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="roselego.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>Boquest Rose Lego FLower</h2>
+                        <h5>3000.00 Php</h5>
+                        <button type="button" onclick="addItem('Boquest Rose Lego FLower','3000.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('Boquest Rose Lego FLower')">Remove</button>
+                        <p>A good gift for anyone. It brings a touch of fun and color as a room decor.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="harrypottercastle.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>Harry Potter Castle Lego</h2>
+                        <h5>28000.00 Php</h5>
+                        <button type="button" onclick="addItem('Harry Potter Castle Lego','28000.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('Harry Potter Castle Lego')">Remove</button>
+                        <p>This collectible has over 6,000 pieces and is packed with many iconic features that you'll see in the movie itself.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="fordgtlego.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>Ford GT Lego</h2>
+                        <h5>7000.00 Php</h5>
+                        <button type="button" onclick="addItem('Ford GT Lego','7000.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('Ford GT Lego')">Remove</button>
+                        <p>A stunning collectible with a working V6 engine, opening doors and opening hood will surely look good in your collections.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="coleninjago.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>Cole Ninjago Lego</h2>
+                        <h5>1900.00 Php</h5>
+                        <button type="button" onclick="addItem('Cole Ninjago Lego','1900.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('Cole Ninjago Lego')">Remove</button>
+                        <p>Find banners in other sets, upgrade the dragon and earn a collectible prize !! Includes 2 mini figures !!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="starwars.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>Star Wars Warship</h2>
+                        <h5>9300.00 Php</h5>
+                        <button type="button" onclick="addItem('Star Wars Warship','9300.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('Star Wars Warship')">Remove</button>
+                        <p>Immerse yourself in this fantastic build with complete and very authentic details !</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="simbalionking.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>Simba Lion King Lego</h2>
+                        <h5>7500.00 Php</h5>
+                        <button type="button" onclick="addItem('Simba Lion King Lego','7500.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('Simba Lion King Lego')">Remove</button>
+                        <p>Happy Anniversary to the Lion King !! This toy features a buildable character with its very own Simba that has very amazing features.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+   
+        <div class="row m-5 p-1" id="categ3">
+   
+            <h1>- Skin Care -</h1>
+            <br><br><br>
+   
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="lizearlw.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>Liz Earle</h2>
+                        <h5>1000.00 Php</h5>
+                        <button type="button" onclick="addItem('Liz Earle','1000.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('Liz Earle')">Remove</button>
+                        <p>Deeply cleanses, hydrates and exfoliate leaving your face clean and clear.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="cicaplast.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>Cicaplast</h2>
+                        <h5>750.00 Php</h5>
+                        <button type="button" onclick="addItem('Cicaplast','750.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('Cicaplast')">Remove</button>
+                        <p>Soothing cream that hydrates dry skin as it protects it from the wind and cold.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="brightniacinamide.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>Brightening Niacinamide</h2>
+                        <h5>1200.00 Php</h5>
+                        <button type="button" onclick="addItem('Brightening Niacinamide','1200.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('Brightening Niacinamide')">Remove</button>
+                        <p>For brighter, clearer, smoother, even-tone and re-energized skin.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="facialmask.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>Facial Mask</h2>
+                        <h5>1400.00 Php</h5>
+                        <button type="button" onclick="addItem('Facial Mask','1400.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('Facial Mask')">Remove</button>
+                        <p>Helps invigorate and brighten dull skin. Formulated with cranberry seeds to exfoliate your face leaving it soft and smooth.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="midnighteye.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>Midnight Recovery Eye</h2>
+                        <h5>2600.00 Php</h5>
+                        <button type="button" onclick="addItem('Midnight Recovery Eye','2600.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('Midnight Recovery Eye')">Remove</button>
+                        <p>Get rid of your tired-looking eyes with our Midnight Recovery Eye Cream, reduces puffiness and dark circles!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="beautyelixir.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>Caudalie Beauty Elixir</h2>
+                        <h5>2600.00 Php</h5>
+                        <button type="button" onclick="addItem('Caudalie Beauty Elixir','2600.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('Caudalie Beauty Elixir')">Remove</button>
+                        <p>Light. Refreshing. Glowy. Multipurpose mist set to tighten your pores and make-up.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+   
+        <div class="row m-5 p-1" id="categ4">
+   
+            <h1>- Shoes -</h1>
+            <br><br><br>
+   
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="nb530.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>New Balance 530</h2>
+                        <h5>5700.00 Php</h5>
+                        <button type="button" onclick="addItem('New Balance 530','5700.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('New Balance 530')">Remove</button>
+                        <p>A contemporary, everyday style with millenium aesthetics.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="gelkayano30.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>Gel-Kayano 30 Wide</h2>
+                        <h5>10500.00 Php</h5>
+                        <button type="button" onclick="addItem('Gel-Kayano 30 Wide','10500.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('Gel-Kayano 30 Wide')">Remove</button>
+                        <p>From 5 kilometer run to full marathons, this shoe is designed for running as it provides stability and softer cushion.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="mexico66.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>Mexico 66</h2>
+                        <h5>8500.00 Php</h5>
+                        <button type="button" onclick="addItem('Mexico 66','8500.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('Mexico 66')">Remove</button>
+                        <p>Designed as a running shoe, but now a practical footwear with low-cut, slim-silhoutted and flexible.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="cury11.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>Curry 11</h2>
+                        <h5>500.00 Php</h5>
+                        <button type="button" onclick="addItem('Curry 11','500.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('Curry 11')">Remove</button>
+                        <p>Ultimate Bounce. Grip. Stability.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="nikedunklow.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>Nike Dunk Low</h2>
+                        <h5>5500.00 Php</h5>
+                        <button type="button" onclick="addItem('Nike Dunk Low','5500.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('Nike Dunk Low')">Remove</button>
+                        <p>Sleek looking shoes with premium leather and modern foam midsole, offers lightweight and responsive cushioning.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="ualockdown6.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h2>Grade School UA Lockdown 6</h2>
+                        <h5>2500.00 Php</h5>
+                        <button type="button" onclick="addItem('Grade School UA Lockdown 6','2500.00')">Add to cart</button>
+                        <button type="button" onclick="subtractItem('Grade School UA Lockdown 6')">Remove</button>
+                        <p>Durable leather upper with mesh panels for added breathability & comfort. Durable solid rubber outsole.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br><br>
+        <form action="http://sirjm.infinityfreeapp.com/checkout.php" method="get" style="justify-content: center;">
+        <div class="row m-5 p-3">
+            <div class="col-lg-6 m-0 p-3">
+                <div class="card m-0 p-3" id="form" style="background-color: #dbe6c4;">
+                    <h4>Delivery Details</h4>
+                    <br>
+                    <label for="cust_name">Customer name:</label>
+                    <br>
+                    <input type="text" id="cust_name" name="cust_name" class="form-control">
+                    <br>
+                    <label for="cust_email">Email :</label>
+                    <input type="email" id="cust_email" name="cust_email" class="form-control">
+                    <br>
+                    <label for="cust_addr">Delivery address:</label>
+                    <br>
+                    <input type="text" id="cust_addr" name="cust_addr" class="form-control">
+                    <br>
+                    <input type="hidden" name="cust_order" id="cust_order">
+                    <div style="text-align:  center;">
+                        <button class="button" style="background-color: #c4d1a9;" type="button" onclick="checkout()">Checkout</button>
+                        <input class="button" style="background-color: #c4d1a9;" type="reset" value="Clear">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 m-0 p-3">
+                <div class="card m-0 p-3" id="co" style="background-color: #c4d7e6">
+                    <h4>Your Cart</h4>
+                    <div class="card-body">
+                        <h4 id="totalCost">Total: ₱0.00</h4>
+                        <ul id="arrayCartDetails"></ul>
+                        <br><br>
+                        <div class="d-grid gap-2">
+                            <button class="button" style="background-color: #4056a1;" type="reset" onclick="location.reload()">Clear Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+
+    <br>
+
+    <div class="row m-0 p-3" style="background-color: #e1f3e6; text-align: center;">
+        <p>Copyright 2024. Shopkins. All Rights Reserved.</p>
+    </div>
+</body>
+</html>
+
+
+
